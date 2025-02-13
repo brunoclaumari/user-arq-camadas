@@ -30,6 +30,7 @@
 		<java.version>17</java.version>
 		<lombok.version>1.18.36</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<spring-cloud.version>2024.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<!--Spring dependencies-->
@@ -50,6 +51,22 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<exclusions>
+<!--				<exclusion>-->
+<!--					<groupId>commons-fileupload</groupId>-->
+<!--					<artifactId>commons-fileupload</artifactId>-->
+<!--				</exclusion>-->
+				<exclusion>  <!-- declare the exclusion here -->
+					<groupId>commons-io</groupId>
+					<artifactId>commons-io</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!--Spring dependencies-->
 
 		<!--h2 dependencies-->
@@ -74,6 +91,17 @@
 		</dependency>
 		<!--mapsctruct dependencies-->
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
